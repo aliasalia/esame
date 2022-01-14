@@ -8,7 +8,7 @@
                 'border-emerald-300 border-2': sort != 'desc'
             }"
             @click="sortF('desc')">
-                biggest
+                biggest ⇡
             </button>
             <button
             class="px-2 rounded-sm hover:bg-emerald-200"
@@ -17,7 +17,7 @@
                 'border-emerald-300 border-2': sort != 'asc'
             }"
             @click="sortF('asc')">
-                smallest 
+                smallest ⇣
             </button>
         </div>
         <div v-for="field in fields" :key="field.id">
@@ -32,9 +32,9 @@
                 </div>
             </div>
             <div class="flex mt-2 mb-7 justify-between">
-                <button class="border-emerald-300 border-2 rounded-sm px-3 py-1 mr-3 text-center text-sm hover:bg-emerald-300" @click="toView(field.id)">View</button>
-                <button class="border-emerald-300 border-2 rounded-sm px-3 py-1 mr-3 text-center text-sm hover:bg-emerald-300" @click="toMod(field.id)">Modify</button>
-                <button class="border-emerald-300 border-2 rounded-sm px-3 py-1 text-center text-sm hover:bg-emerald-300" @click="del(field.id)">Delete</button>
+                <button class="border-emerald-300 border-2 rounded-sm px-3 py-1 text-center text-sm hover:bg-emerald-300" @click="del(field.id)">Delete ×</button>
+                <button class="border-emerald-300 border-2 rounded-sm px-3 py-1 text-center text-sm hover:bg-emerald-300" @click="toMod(field.id)">Modify ⁂</button>
+                <button class="border-emerald-300 border-2 rounded-sm px-3 py-1 text-center text-sm hover:bg-emerald-300" @click="toView(field.id)">View ⋙</button>
             </div>
         </div>
     </div>
@@ -73,7 +73,9 @@ export default {
             this.$router.push("/detail/"+ id);
         },
         del(id) {
-            axios.delete("http://localhost:8000/api/fields/" + id);
+            let res = axios.delete("http://localhost:8000/api/fields/" + id);
+            console.log(res.status);
+            console.log(res.data);
             this.getFields();
         },
     }
